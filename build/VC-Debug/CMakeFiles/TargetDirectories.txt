@@ -1,0 +1,8 @@
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/untitled.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/edit_cache.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/rebuild_cache.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/list_install_components.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/install.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/install/local.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/untitled_autogen_timestamp_deps.dir
+D:/Qt/untitled/build/VC-Debug/CMakeFiles/untitled_autogen.dir
