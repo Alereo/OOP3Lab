@@ -1,5 +1,6 @@
 #include "Head_Student.h"
 
+
 Headman_Mullayarov::Headman_Mullayarov()
 {
     position = "";
@@ -50,5 +51,30 @@ void Headman_Mullayarov::createStudent(istream& in)
     }
 
 }
+int* Headman_Mullayarov::countLen(){
+    int* array = new int[6];
+    array[0] = name.length();
+    array[1] = surname.length();
+    array[2] = 2;
+    array[3] = 1;
+    array[4] = 9;
+    array[5] = 1;
+    return array;
+}
 
+void Headman_Mullayarov::draw(QPainter& painter,int x, int* y, int* arrayLens){
+    QTextLayout textLayout;
+    QFont font("Arial", 12);
+    textLayout.setFont(font);
+
+    QString text = QString("%1 %2 %3 %4")
+                       .arg(QString::fromStdString(name),arrayLens[0] - name.size())
+                       .arg(QString::fromStdString(surname),arrayLens[1] - surname.size())
+                       .arg(age,arrayLens[2] - 2)
+                       .arg(mark, arrayLens[3] - 1)
+                       .arg(QString::fromStdString(position),abs(static_cast<int>(arrayLens[4] - position.size())))
+                       .arg(amount_subjects,arrayLens[5] - 1);
+    painter.drawText(x, *y, text); // Draw the text
+    *(y)+=30;
+}
 

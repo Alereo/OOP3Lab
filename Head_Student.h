@@ -15,8 +15,8 @@ public:
 
     void showStudent(ostream& out) override;
     void createStudent(istream& in) override;
-
-
+    int* countLen() override;
+    void draw(QPainter& painter,int x, int* y, int* arrayLens) override;
 
     template<class Archive>
     void save(Archive& ar, const unsigned int version) const

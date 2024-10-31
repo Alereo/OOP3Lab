@@ -16,12 +16,26 @@ void MyWidget::paintEvent(QPaintEvent *event){
 
     QTextLayout textLayout;
     // Устанавливаем шрифт для текста
-    QFont font("Arial", 16, QFont::Bold);
+    QFont font("Arial", 12, QFont::Bold);
     painter.setFont(font);
 
-    int y = 40;
-    int x = 10;
-    group.drawStudents(painter,x,&y);
+    int *arrayMaxLen = new int[6];
+    QString textTable = QString("   Имя   \n        Фамилия     \nВозраст     Оценка     \nДолжность     \nКоличество предметов");
+    painter.drawText(10, 30, textTable);
+    if (group.students.size()!=0){
+        group.countLenMax(arrayMaxLen);
+
+        for (int var = 0; var < 6; ++var) {
+            cout << "namber: " << arrayMaxLen[var];
+        }
+
+        int y = 50;
+        int x = 10;
+
+        group.drawStudents(painter,x,&y, arrayMaxLen);
+    }
+
+
 
 }
 

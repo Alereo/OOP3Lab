@@ -43,9 +43,9 @@ void Group_Mullayarov::printFileGroup() {
     }
 }
 
-void Group_Mullayarov::drawStudents(QPainter& painter, int x, int* y){
+void Group_Mullayarov::drawStudents(QPainter& painter, int x, int* y, int* arrayLen){
 
-    std::for_each(students.begin(), students.end(), std::bind(&Student_Mullayarov::draw,std::placeholders::_1,ref(painter),x, y));
+    std::for_each(students.begin(), students.end(), std::bind(&Student_Mullayarov::draw,std::placeholders::_1,ref(painter),x, y, arrayLen));
 
 }
 
@@ -98,13 +98,11 @@ void Group_Mullayarov::countLenMax(int* arrayRes){
     for (int i = 0; i < students.size(); i++){
         int* studentArray = students[i]->countLen();
         for (int j = 0; j < 6; j++){
-             matrix.at(i).at(j) = studentArray[j];
+            matrix.at(i).at(j) = studentArray[j];
         }
     }
-
-
+    cout << students.size();
     // int arrayRes[6];
-
     // Находим максимальные элементы в столбцах
     for (int j = 0; j < 6; j++) {
         int maxElement = matrix.at(0).at(j); // Начинаем с первого элемента в столбце
@@ -116,7 +114,7 @@ void Group_Mullayarov::countLenMax(int* arrayRes){
         arrayRes[j] = maxElement; // Сохраняем максимальный элемент
     }
 
-    int arrayRes2[6] {3,7,2,1,9,1};
+    int arrayRes2[6] {8,12,12,11,16,6};
 
     for (int i = 0; i < 6; i++){
         if (arrayRes[i] < arrayRes2[i]){

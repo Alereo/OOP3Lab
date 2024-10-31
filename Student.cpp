@@ -77,22 +77,25 @@ void Student_Mullayarov::createStudent(istream& in)
     }
 }
 
-void Student_Mullayarov::draw(QPainter& painter,int x, int* y){
+void Student_Mullayarov::draw(QPainter& painter,int x, int* y, int* arrayLens){
     QTextLayout textLayout;
     QFont font("Arial", 12);
+    //arrayLens[0] - name.size()
     textLayout.setFont(font);
-    QString textTable = QString("Имя: \nФамилия: \nВозраст: ");
-    painter.drawText(x, 10, textTable);
-    QString text = QString("%1 %2 %3")
-                       .arg(QString::fromStdString(name))
-                       .arg(QString::fromStdString(surname))
-                       .arg(age);
+    cout << "Dlina: " << arrayLens[0] << endl;
+    QString text = QString("%1 %2 %3 %4")
+                       .arg(QString::fromStdString(name),arrayLens[0] + 1)
+                       .arg(QString::fromStdString(surname),arrayLens[1] + 1)
+                       .arg(age,arrayLens[2] + 1)
+                       .arg(mark, arrayLens[3] + 1);
+
     painter.drawText(x, *y, text); // Draw the text
+    cout << "dgdg";
     *(y)+=30;
 }
 
 int* Student_Mullayarov::countLen(){
-    int* array;
+    int* array = new int[6];
     array[0] = name.length();
     array[1] = surname.length();
     array[2] = 2;
