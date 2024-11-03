@@ -52,29 +52,28 @@ void Headman_Mullayarov::createStudent(istream& in)
 
 }
 int* Headman_Mullayarov::countLen(){
-    int* array = new int[6];
-    array[0] = name.length();
-    array[1] = surname.length();
-    array[2] = 2;
-    array[3] = 1;
-    array[4] = 9;
-    array[5] = 1;
+    int* array = Student_Mullayarov::countLen();
+    QFont font("Arial", 12);
+    QFontMetrics metrics(font);
+    int positionWidth = metrics.boundingRect(QString::fromStdString(position)).width();
+    int subjectsWidth = metrics.boundingRect(QString::fromStdString(to_string(amount_subjects))).width();
+    array[4] = positionWidth;
+    array[5] = subjectsWidth;
     return array;
 }
 
-void Headman_Mullayarov::draw(QPainter& painter,int x, int* y, int* arrayLens){
+void Headman_Mullayarov::draw(QPainter& painter,int* x, int* y, int* arrayLens){
     QTextLayout textLayout;
     QFont font("Arial", 12);
-    textLayout.setFont(font);
+    QFontMetrics metrics(font);
+    Student_Mullayarov::draw(painter,x, y ,arrayLens);
+    *(y) -= (metrics.height() + 10);
+    int dx = 50;
+    painter.drawText(*x, *y, QString::fromStdString(position));
+    *(x) += arrayLens[4] + dx;
 
-    QString text = QString("%1 %2 %3 %4")
-                       .arg(QString::fromStdString(name),arrayLens[0] - name.size())
-                       .arg(QString::fromStdString(surname),arrayLens[1] - surname.size())
-                       .arg(age,arrayLens[2] - 2)
-                       .arg(mark, arrayLens[3] - 1)
-                       .arg(QString::fromStdString(position),abs(static_cast<int>(arrayLens[4] - position.size())))
-                       .arg(amount_subjects,arrayLens[5] - 1);
-    painter.drawText(x, *y, text); // Draw the text
-    *(y)+=30;
+    painter.drawText(*x, *y, QString::fromStdString(to_string(amount_subjects)));
+
+    *(y) += metrics.height() + 10; // Обновление координаты y с учетом высоты текста
 }
 

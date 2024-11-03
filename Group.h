@@ -25,9 +25,9 @@ public:
     void load(const QString& path);
     void save(const QString& path);
     void deleteGroup();
-    void drawStudents(QPainter& painter, int x, int* y, int* arrayLen);
+    void drawStudents(QPainter& painter, int* x, int* y, int* arrayLen);
     void printStudents();
-    void countLenMax(int* arrayRes);
+    void countLenMax(int* arrayRes,int*arrayTableName);
     void addStudents();
     void addStudentsWithPosition();
     template<class Archive>

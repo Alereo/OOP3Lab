@@ -77,29 +77,55 @@ void Student_Mullayarov::createStudent(istream& in)
     }
 }
 
-void Student_Mullayarov::draw(QPainter& painter,int x, int* y, int* arrayLens){
-    QTextLayout textLayout;
+void Student_Mullayarov::draw(QPainter& painter, int* x, int* y, int* arrayLens) {
+    *x = 10;
     QFont font("Arial", 12);
-    //arrayLens[0] - name.size()
-    textLayout.setFont(font);
-    cout << "Dlina: " << arrayLens[0] << endl;
-    QString text = QString("%1 %2 %3 %4")
-                       .arg(QString::fromStdString(name),arrayLens[0] + 1)
-                       .arg(QString::fromStdString(surname),arrayLens[1] + 1)
-                       .arg(age,arrayLens[2] + 1)
-                       .arg(mark, arrayLens[3] + 1);
+    QFontMetrics metrics(font);
+    // Создайте QString с отступами, чтобы текст не сливался
+    // QString text = QString("%1 %2 %3 %4")
+    //                    .arg(QString::fromStdString(name).leftJustified(arrayLens[0] + 1, ' '))
+    //                    .arg(QString::fromStdString(surname).leftJustified(arrayLens[1] + 1, ' '))
+    //                    .arg(QString::fromStdString(to_string(age)).leftJustified(arrayLens[2] + 1, ' '))
+    //                    .arg(QString::fromStdString(to_string(mark)).rightJustified(arrayLens[3] + 1, ' '));
 
-    painter.drawText(x, *y, text); // Draw the text
-    cout << "dgdg";
-    *(y)+=30;
+
+    // painter.drawText(x, *y, text); // Отрисовка текста
+
+    // for (int i = 0; i < 6 ; i++){
+    //     painter.drawText(x, *y, text);
+    //     x += arrayLens[i] + 10;
+    // }
+    // cout << "x:" << x << endl;
+            int dx = 50;
+    painter.drawText(*x, *y, QString::fromStdString(name));
+    *(x) += arrayLens[0] + dx;
+        // cout << "x1:" << x << endl;
+    painter.drawText(*x, *y, QString::fromStdString(surname));
+        *(x) += arrayLens[1] + dx;
+    painter.drawText(*x, *y, QString::fromStdString(to_string(age)));
+        *(x) += arrayLens[2] + dx;
+    painter.drawText(*x, *y, QString::number(round(mark * 100) / 100, 'f', 1));
+        *(x) += arrayLens[3] + dx;
+        cout << round(mark*100)/100;
+    *(y) += metrics.height() + 10; // Обновление координаты y с учетом высоты текста
+
 }
 
 int* Student_Mullayarov::countLen(){
+    QFont font("Arial", 12);
+    QFontMetrics metrics(font);
+    // Получите размеры текста для каждой части строки
+    int nameWidth = metrics.boundingRect(QString::fromStdString(name)).width();
+    int surnameWidth = metrics.boundingRect(QString::fromStdString(surname)).width();
+    int ageWidth = metrics.boundingRect(QString::fromStdString(to_string(age))).width();
+    int markWidth = metrics.boundingRect(QString::number(round(mark * 100) / 100, 'f', 1)).width();
     int* array = new int[6];
-    array[0] = name.length();
-    array[1] = surname.length();
-    array[2] = 2;
-    array[3] = 1;
+    // cout << "nameWidth: "<<nameWidth << endl;
+    // cout << "surnameWidth: "<< surnameWidth << endl;
+    array[0] = nameWidth;
+    array[1] = surnameWidth;
+    array[2] = ageWidth;
+    array[3] = markWidth;
     array[4] = 0;
     array[5] = 0;
     return array;

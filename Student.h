@@ -23,7 +23,7 @@ public:
     virtual void createStudent(istream& in);
     virtual ~Student_Mullayarov();
     virtual int* countLen();
-    virtual void draw(QPainter& painter,int x, int* y, int* arrayLens);
+    virtual void draw(QPainter& painter,int* x, int* y, int* arrayLens);
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
     {

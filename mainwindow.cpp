@@ -4,12 +4,13 @@
 #include "Group.h"
 
 #include <QFileDialog>
-
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
 
 
@@ -35,9 +36,12 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
     fileName = QFileDialog::getOpenFileName(this, tr("Открыть"), QDir::currentPath(), tr("Текстовый файл (*.txt)"));
-    if (!fileName.isEmpty())
+    if (!fileName.isEmpty()){
         std::cout << "text1";
         ui->myWidget->load(fileName);
+        ui->myWidget->onSetHeight(600);
+        ui->myWidget->onSetHeight(800);
+    }
 }
 
 void MainWindow::on_actionNew_triggered()

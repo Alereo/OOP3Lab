@@ -43,7 +43,7 @@ void Group_Mullayarov::printFileGroup() {
     }
 }
 
-void Group_Mullayarov::drawStudents(QPainter& painter, int x, int* y, int* arrayLen){
+void Group_Mullayarov::drawStudents(QPainter& painter, int* x, int* y, int* arrayLen){
 
     std::for_each(students.begin(), students.end(), std::bind(&Student_Mullayarov::draw,std::placeholders::_1,ref(painter),x, y, arrayLen));
 
@@ -92,7 +92,9 @@ void Group_Mullayarov::deleteGroup() {
     students.clear();
 }
 
-void Group_Mullayarov::countLenMax(int* arrayRes){
+void Group_Mullayarov::countLenMax(int* arrayRes, int*arrayTableName){
+    QFont font("Arial", 12);
+    QFontMetrics metrics(font);
     int max = 3;
     std::vector<std::vector<int>> matrix(students.size(), std::vector<int>(6));
     for (int i = 0; i < students.size(); i++){
@@ -114,11 +116,13 @@ void Group_Mullayarov::countLenMax(int* arrayRes){
         arrayRes[j] = maxElement; // Сохраняем максимальный элемент
     }
 
-    int arrayRes2[6] {8,12,12,11,16,6};
+    // int arrayRes2[6] {3,7,7,6,9,10};
+
+
 
     for (int i = 0; i < 6; i++){
-        if (arrayRes[i] < arrayRes2[i]){
-            arrayRes[i] = arrayRes2[i];
+        if (arrayRes[i] < arrayTableName[i]){
+            arrayRes[i] = arrayTableName[i];
         }
     }
 }
